@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+	<script src="jquery-3.4.1.min.js"> // jquery 사용 
+	</script>
+<meta charset="UTF-8">
+<title>Untitled Document</title>
+</head>
+
+<body>
+	<h3>jQuery Example</h3>
+	<p>This is a heading</p>
+	<p>This is a paragraph</p>
+	<p>This is another paragraph.</p>
+	<h5 id = "pa">$("#id") sentence hide ! </h5>
+	<h5 class="test">$(".class") sentence hide !</h5>
+	<button>Click me to hide paragraphs</button>
+	
+	<script>
+		//$("tag") tag 요소만 해당 
+		$(document).ready(function(){ // document.ready()
+			$("button").click(function(){
+				$('p').hide(); // <p>요소 모두 사라짐 
+			});
+		});
+		// $("body *") 전체 선택자(<body>에 포함된 모든 요소를 선택)
+		$(document).ready(function(){
+			$("button").click(function(){
+				$("body *").css("background-color","yellow"); 
+			});
+		});
+		// $("#id") #id 선택자 해당 id를 가진 요소를 선택 (id="pa")
+		$(document).ready(function(){
+			$("button").click(function(){
+				$("#pa").hide();
+			});
+		});
+		//$(".class") class 선택자 class를 가진 요소를 선택 (class="test")
+		$(document).ready(function(){
+			$("button").click(function(){
+				$(".test").hide();
+			});
+		});
+		//$("태그1,태그2,태그3...") 태그한 요소들만 해당
+		$(document.ready(function(){
+			$("button").click(function(){
+				$("p, h5").hide(); // div, span 등등 
+			});
+		}));
+	</script>
+</body>
+</html>

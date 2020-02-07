@@ -1,0 +1,100 @@
+(Form 유효성 자동 검증)
+
+<form method="post">
+	<input type="text" name="fname" required> 
+	<input type="submit" value="submit">
+</form>
+
+(날짜 형식)
+
+<h3> What day is it? (ex| 2017/02/23)</h3>
+<input type="text" id="txt">
+<button type="button" onClick="ch()">날짜 확인</button>
+<p id="h"></p>
+<script>
+	function ch(){
+		var form = /^\d{4}\/\d{1,2}\/\d{1,2}/;
+		var val = document.getElementById("txt").value;
+		if(val.match(form)){
+		  	document.getElementById("h").innerHTML="올바른 형식입니다.";
+		}else{
+			document.getElementById("h").innerHTML="잘못된 형식입니다.";
+		}
+	}
+</script>
+
+(해당 문자열 인덱스 찾기)
+
+function bu(){
+	var val = document.getElementById("txt_").value;
+	var x = document.getElementById("str").innerHTML.search(val);
+	document.getElementById("index").innerHTML="Index of the "+val+" : "+x;
+}
+
+(자동 숫자 범위 확인 (속성: max ,min을 활용))
+
+<h3> checkValidity / validationMessage </h3>
+<p>Enter a number and click OK: (100~300)</p>
+<input type="number" id="_txt" max="300" min="100" required>
+<button onClick="che()">Check</button>
+<p id="demo"></p>
+<script>
+function che(){
+	var inp = document.getElementById("_txt");
+	if(inp.checkValidity() == false){ // 입력 요소에 유효한 데이터가 포함어어 있으면 true를 반환
+		document.getElementById("demo").innerHTML = inp.validationMessage; // 입력 요소의 validationMessage 속성을 설정한다.
+	}else{
+		document.getElementById("demo").innerHTML = "Input OK";
+	}
+}
+</script>
+
+(오름차순 Sort)
+
+var arr =  [1, 6, 48, 3, 58, 23];
+arr.sort(function(a,b){return a-b}); // sort();
+
+(주민등록번호)
+
+function check (){
+	var x = check_.number.value;
+	var flag = /\d{6}-[1234]\d{6}/; // g : 모든 문자열에 해당, \d{6} 6자리 [12] 1 또는 2 또는 3 또는 4
+	if(flag.test(x)){ // 플래그 method 
+		document.getElementById("demo_1").innerHTML= x; // flag.exec(x) // 발견된 텍스트 출력
+	}
+}
+
+(예외처리)
+
+<h3 > (Try, Catch, throw, finally) 예외처리 </h3>
+<p >Please input a number between 5 and 10: </p>
+<input type="text" id = "value_">
+<button type="button" onClick="check()">Test input</button><br>
+<p id="d"></p>
+<script>
+	function check(){
+		var msg;
+		var x = document.getElementById("value_").value;
+		try{ // 오류가 발생할 수 있는 블록 
+			if(x==""){throw "empty";}
+			if(isNaN(x)){throw "not a number";}
+			x = Number(x); // 중요 !
+			if(x < 5) {throw "too low";}
+			else if(x > 10){
+				throw "too high";
+			}
+			/*else{
+				throw "nice data !"; // 이렇게 사용할 수 도 있음. !! 
+				//document.getElementById("d").innerHTML= "nice data !";
+			}*/ // Finally를 사용하지 않을 경우
+		}catch(err){ // 오류가 발생했을 때 처리하는 블록 
+			msg = err;
+		}finally{ // finally 는 try와 catch와 상관없이 무조건 실행되는 블록
+			if(msg == undefined){ // var 변수 선언 이후 선언해주지 않으면 undefined가 할당되므로 이를 이용함.
+			document.getElementById("d").innerHTML="Good Data !";
+			}else{
+				document.getElementById("d").innerHTML=("input is "+msg) ;
+			}
+		}
+	}	
+</script>

@@ -1,0 +1,157 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Untitled Document</title>
+</head>
+
+<body>
+	<h2>브라우저 객체 (BOM)</h2>
+	<h3>document, frames[ ], history, location, navigator, screen (window의 하위 객체)</h3>
+	<script>
+		document.write("브라우저 윈도우 창의 크기","<br>");
+		document.write("innerWidth : ",window.innerWidth," ");
+		document.write("innerHeight : ", window.innerHeight);
+	</script>
+	<p> Create a Window and display a name of window</p>
+	<p> +추가설명) name 매개변수 종류: _blank,_parent,_self,_top</p>
+	
+	<script>
+		var myVar;
+		var mywindow = window.open("","myWindow","left=100,top=100,width=300,height=100");// url, name , (width,height)
+		//mywindow.focus(); 현재 open한 창에 focus를 맞추게 된다.
+		
+		//mywindow.setTimeout(function(){mywindow.close()},10000); // 10초 뒤에 열린 창이 닫힘. (1초 = 1000)
+		mywindow.document.write("This window`s name is : ",mywindow.name,"<br>"); // 열린 창 안에 내용들 
+		mywindow.document.write("screenLeft : ",mywindow.screenLeft,"<br>"); // x좌표 
+		mywindow.document.write("screenTop : ",mywindow.screenTop,"<br>"); // y좌표
+		
+		document.write("<p>top : 최상위 window 여부를 반환 </p>");
+		document.write(mywindow.top,"<br>");
+		document.write("<p>self : 현재 window를 반환 </p>");
+		document.write(mywindow.self,"<br>");
+		
+		if(mywindow.top == mywindow.self){
+			document.write("This Window is the topmost window ! <br>");
+		}else{
+			document.write("This Window is not the topmost window ! <br>");
+		}
+		function move_to(){ //moveTo
+			mywindow.moveTo(200,100); // move
+			mywindow.focus();
+		}
+		function move_by(){ //moveBy // 상대적
+			mywindow.moveBy(200,100);
+			mywindow.focus();
+		}
+		function resize_to(){ 
+			mywindow.resizeTo(800,600);
+			mywindow.focus();
+		}
+		function resize_by(){ // 상대적
+			mywindow.resizeBy(200,200);
+			mywindow.focus();
+		}
+		function setTimeout_(){ // 지정된 시간에 함수 시행
+			myVar= setTimeout(function(){mywindow.close();},5000);// 새로운 변수 사용 
+		}
+		function clearTimeout_(){ // 시간 지정 clear 
+			clearTimeout(myVar);
+		}
+	</script>
+	<h3> Move the internet site </h3>
+	<button type="button" onClick="move_to()" >MoveTo</button>
+	<button type="button" onClick="move_by()" >MoveBy</button>
+	<br>
+	<h3> Resize the internet site </h3>
+	<button type="button" onClick="resize_to()">resizeTo</button>
+	<button type="button" onClick="resize_by()">resizeBy</button>
+	<br>
+	<h3> setTimeout and clearTimeout</h3>
+	<button type="button" onClick="setTimeout_()">setTimeout</button>
+	<button type="button" onClick="clearTimeout_()">clearTimeout</button>
+	
+	<h3> setInterval and clearInterval </h3>
+	<p>A script on this page starts this clock : </p>
+	<p id="time_"></p>
+	<script>
+		var myVar = setInterval(setInterval_,1000);
+		function setInterval_(){ // 
+			var time = new Date();
+			document.getElementById("time_").innerHTML=time.toTimeString();
+		}
+	</script>
+	<button type="button" onClick="clearInterval(myVar)">clearInterval(Time Stop)</button>
+	
+	<br>
+	<h3>Window current location </h3>
+	<script>
+		document.write(window.location);
+		alert("상위 window: "+window.parent.location); // 최상위 window 위치 (콤마하면 안뜸, + 기호를 사용해주어야한다.)
+	</script>
+	<h3>frame의 각 요소(인덱스)는 iframe을 사용하여 지정 </h3>
+	<button type="button" onclick = "myfunction()">Try it !</button>
+	<iframe src="https://hello.com"></iframe> 
+	<iframe src="https://www.daum.net"></iframe>
+	<script>
+		function myfunction(){ // array name: frames
+			window.frames[1].location ="https://www.google.com"; // location change 
+		}
+		document.write("<br> window length : ",window.length,"<br>");
+	</script><br>
+	<h3> Move in the Google Page </h3>
+	<button type="button" onClick="Daum_page()">Google</button>
+	<button type="button" onClick="close_()">Close</button>
+	
+	<script>
+		var change;
+		function Daum_page(){
+			// 전체 스크린 
+			//change = window.open("https://www.google.com","_blank",'height=' + screen.height + ',width=' + screen.width + 'fullscreen=yes'); 
+			change = window.open("https://www.google.com","_blank","left=100,top=100,width=800,height=600");
+		}	
+		
+		function close_(){change.close();}
+	</script>
+	<h3> Screen Object </h3>
+	<p> screen.width , screen.height</p>
+	<p> screen.availwidth , screen.availheight</p>
+	<p> screen.colorDepth , screen.pielDepth</p>
+	
+	<h3> Location Object </h3>
+	<p>Display the entire URL of the current page</p>
+	<script>
+		//var mywindow = window.open("https://www.naver.com","_blank","width="+screen.width+"height="+screen.height+"fullscreen=yes");
+		document.write("Page host is: ",window.location.host,"<br>"); // 
+		document.write("Page location is: ",window.location.href,"<br>");
+		document.write("Page hostname is: ",window.location.hostname,"<br>"); //현재 페이지의 인터넷 호스트의 이름
+		document.write("Page path is: ",window.location.pathname,"<br>");
+	</script>
+	<h3>(window.location.protocol)</h3>
+	<p>Display the protocol portion of the current URL.</p>
+	<p id="demo"></p>
+	<script>
+		document.getElementById("demo").innerHTML="Page protocol is : "+window.location.protocol;
+	</script>
+	
+	<button type="button" onClick="Load()">Load new document</button>
+	<script>
+		function Load(){
+			window.location.assign("https://www.google.com"); // 현재페이지에서 assign 페이지로 새로 로드됨.
+		}
+	</script>
+	<p>버튼 클릭시 현재페이지에서 구글페이지로 새로 로드됨.</p>
+	<h3>History Object</h3>
+	<p>history back/forward</p>
+	<input type="button" value="Back" onClick="BACK()">
+	<input type="button" value="Forward" onChange="FORWARD()">
+	<script>
+		function BACK(){window.history.back()} // 이전 URL을 로드한다.
+		function FORWARD(){window.history.forward()} // 다음 URL을 로드한다.
+	</script>
+	<h3>Navigator Object</h3>
+	<p>window.navigator객체에는 방문자의 브라우저에 대한 정보가 들어있음.</p>
+	<p>Attribute: cookieEnabled, appName, appCodeName, product, appVersion, userAgent, platform, language, online</p>
+	<p>Method: javaEnabled() </p>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Untitled Document</title>
+	<script>
+		function practice (a, b){
+			return a*b;
+		}
+		var p = function(a, b){
+			return a+b;
+		}
+	</script>
+</head>
+
+<body>
+	<h2 > Function </h2>
+	
+	<script>
+		document.write(practice(3,4)+"<br>");
+		document.write(p(3,4)+"<br>");
+	</script>
+	<p> Sort()</p>
+	<script>
+		function compare(a,b){
+			return a-b; // b-a 내림차순
+		}
+		var score = [40 , 9 ,7, 90, 58 , 19 , 80];
+		document.write(score.sort(compare));
+	</script><br>
+	<h3> eval 함수의 이해</h3>
+	<script>
+		var score = "val = 90";
+		var score2 = "val2 = 10";
+		document.write(eval(score)+ eval(score2));
+		var a = 100;
+		document.write(isNaN(a)+"<br>");
+ 	</script>
+	
+	<h3>Understanding of Call() method </h3>
+	<script>
+		var person = {
+			firstName: "John", // 콤마 잊지말기
+			lastName: "Park",
+			FullName: function(){
+				return this.firstName +" "+ this.lastName; // this 사용 !! 인자에 따라 달라지게 하기 위해
+			}
+		}
+		var object = {
+			firstName: "Mary",
+			lastName: "Lockman",
+		}
+		
+		document.write(person.FullName(object)+"<br>"); // call을 사용하지 않은 경우
+		document.write(person.FullName.call(object)); // call 사용한 경우 
+	</script>
+	
+	<h3>Counting with a global variable</h3>
+	<button type = "button" onclick="myFunction()">Count!</button>
+	<p id="demo">0</p> 
+	<script>
+		var count= 0;
+		function add(){
+			return count+=1;
+		}
+		function myFunction(){
+			document.getElementById("demo").innerHTML=add();
+		}
+	</script>
+	<h3>Counting with a local variable</h3>
+	<button type="button" onclick="local_()">Count!</button>
+	<p id="demo2">0</p>
+	<script>
+		var add_local = (function (){
+			var count = 0;
+			return function(){return count+=1};
+		})(); // Closures 클로저
+		function local_(){document.getElementById("demo2").innerHTML=add_local()}
+	</script>
+</body>
+</html>

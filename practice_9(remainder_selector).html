@@ -1,0 +1,134 @@
+<!doctype html>
+<html>
+<head>
+	<script src="jquery-3.4.1.min.js"></script>
+<meta charset="UTF-8">
+<title>Untitled Document</title>
+</head>
+
+<body>
+	<h2> Remainder Selector </h2>
+	<h3>Have a Good time ~ </h3>
+	<h4>It`s very good</h4>
+	<h3>Hava a good time</h3>
+	<p style="display:none">This sentence is hidden by (display:none)</p>
+	<p class="p">red</p>
+	<p>blue</p>
+	
+	<h3>header selector</h3>
+	<button id="header">header</button><br>
+	<script>
+		$(document).ready(function(){
+			$("#header").click(function(){
+				$(":header").css("background-color","yellow");
+			})
+			$("#con").click(function(){
+				$("h3:contains(time)").css("background-color","orange");
+			})
+		})
+	</script>
+	<h3>animated selector </h3>
+	<button class="btn">Change color of the animated element</button>
+	<div style="background-color:blue">DIV 1</div>
+	<div style="background-color:green">DIV 2</div>
+	<script>
+		$(document).ready(function(){
+			function aniDiv(){ // 
+				$("div:eq(1)").animate({width:"50%"},"slow"); //(selector).animate({styles},speed,easing,callback)
+				$("div:eq(1)").animate({width:"100%"},"slow",aniDiv);
+			}
+			aniDiv();
+			$(".btn").click(function(){
+				$(":animated").css("background-color","red");
+			})
+		})
+	</script>
+	<h3> focus selector </h3>
+	<input type="text">
+	<script>
+		$(document).ready(function(){
+			$("input").focus();
+			$(":focus").css("background-color","aqua");
+		})
+	</script>
+	<h3> Contains(text) selector (ex: "p:contains(red)")</h3>
+	<button id="con">contains</button>
+	
+	<h3> has selector</h3>
+	<div>
+		<p>This is a paragraph inside a div element.<br>
+			<span>This is a span element</span>
+		</p>
+		<li>This is a list item inside a div element</li>
+	</div><br>
+	<div>
+		<li>This is a list item inside a div element</li>
+	</div>
+	<button id="has">has</button>
+	<script>	
+		$(document).ready(function(){
+			$("#has").click(function(){
+				$("div:has(p,span,li)").css("border","solid red"); // 내부에 하나 이상의 요소가 있고 지정된 선택자와 일치하는 모든 요소를 선택
+			})
+		})
+	</script>
+	<h3>empty selector</h3>
+	<table border="1">
+		<tr>
+			<td>대한민국</td>
+			<td></td>
+			<td>서울</td>
+		</tr>
+		<tr>
+			<td>프랑스</td>
+			<td>캐나다</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>독일</td>
+			<td></td>
+			<td>베를린</td>
+		</tr>
+	</table>
+	<script>
+		$(document).ready(function(){
+			$("#empty").click(function(){
+				$(":empty").css("background-color","black");
+			})
+		})
+	</script>
+	<button id="empty">empty</button>
+	
+	<h3> :hidden / :visible</h3>
+	<script>
+		//<p style="display:none"> </p>
+		$(document).ready(function(){
+			$("#hidden").click(function(){
+				$("p:hidden").show(3500); // 숨겨진 p요소 문장이 3.5초 기다린 후에 보여줌.
+			})
+			$("#visible").click(function(){
+				$("p:visible").css("background-color","yellow");
+			})
+		})
+	</script>
+	<button id="hidden">hidden</button>
+	<button id="visible">visible</button>
+	
+	<h3> :root / :lang()</h3>
+	<p lang="ko">Korean</p>
+	<p >Nothing</p>
+	<p lang="en">English</p>
+	<script>
+		$(document).ready(function(){
+			$("#root").click(function(){
+				$(":root").css("background-color","black");
+			})
+			$("#lang").click(function(){
+				$("p:lang(ko)").css("background-color","blue");
+			})
+		})
+	</script>
+	<button id="root">root</button>
+	<button id="lang">lang</button>
+</body>
+</html>

@@ -1,0 +1,181 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Untitled Document</title>
+	<script src="jquery-3.4.1.min.js"></script>
+</head>
+	
+<body>
+	<h6>Welcome to My Homepage</h6>
+	<p class="intro">My name is Donald.</p>
+	<p lang="ko" name="nation">korea language </p>
+	<p title="Tomorrow-the day after today">This is a paragraph.</p>
+	<p id="id1" name="nationary">I live in Duckburg.</p>
+	<p id="id2">My best friend is Mickey.</p>
+	<p title="Tomorrow">Who is your favourite</p>
+	<ul id="choose">
+		<li>Kia</li>
+		<li>BMW</li>
+		<li>Benz</li>
+		<li>Hyundae</li>
+	</ul>
+	<a href="https://www.google.com">Google.com</a>
+	<a href="https://www.daum.net">Daum.net</a>
+	<h3> :eq() / :gt() / :lt() / :not() </h3>
+	<script>
+		$(document).ready(function(){
+			$("#eq_").click(function(){
+				$("p:eq(1)").css("background-color","red"); // index 1 선택 
+			})
+			$("#gt_").click(function(){
+				$("li:gt(1)").css("background-color","yellow"); // index 1 보다 큰 값들 선택 
+			})
+			$("#lt_").click(function(){
+				$("li:lt(2)").css("background-color","blue"); // index 1 보다 작은 값들 선택 
+			})
+			$("#not_").click(function(){
+				$("p:not(.intro)").css("background-color","green");  // class intro 를 제외한 나머지 
+			})
+		})
+	</script>
+	<button id="eq_">eq</button>
+	<button id="gt_">gt</button>
+	<button id="lt_">lt</button>
+	<button id="not_">not</button>
+	
+	<h3> Attribute Selector </h3>
+	<script>
+		$(document).ready(function(){
+			$("#attribute").click(function(){
+				$("[id]").css("background-color","red"); // id가 존재하는 모든 요소 선택 
+			})
+			$("#att_val").click(function(){
+				$("[id=choose]").css("background-color","yellow"); // id가 choose 인 것 (attribute = value) 선택 
+			})
+			$("#attval").click(function(){
+				$("p[class != 'intro']").css("background-color","blue"); // p요소에 class intro가 아닌 것 선택 
+			})
+			$("#att").click(function(){ 
+				$("a[href $= '.net']").css("background-color","green"); // <a>태그의 href속성 값이 .net으로 끝나는 것 선택 
+			})
+			$("#tit").click(function(){
+				$("p[title|=Tomorrow]").css("background-color","black"); // p요소에 title(attribute)이 Tomorrow(value)이거나 (-)하이픈으로 연결된 요소 선택
+			})	
+			$("#name_").click(function(){
+				$("p[name^='nation']").css("background-color","aqua"); // p요소 attribute에 value값으로 시작하는 것이 있는 것을 선택 
+			})
+			$("#n_").click(function(){
+				$("p[name~='nation']").css("background-color","aquamarine"); // p요소 attribute에 value값과 일치하는 것을 선택 
+			})
+			$("#na_").click(function(){ 
+				$("p[name*='nation']").css("background-color","grey"); // p요소 attribute에 value값을 포함하는 것을 선택 
+			})
+		})
+	</script>
+	<button id="attribute">attribute</button>
+	<button id="att_val">attribute=value</button>
+	<button id="attval">attribute!=value</button>
+	<button id="att">attribute$=value</button>
+	<button id="tit">attribute|=value</button>
+	<button id="name_">attribute^=value</button>
+	<button id="n_">attribute~=value</button>
+	<button id="na_">attribute*=value</button>
+	
+	<h3>폼 서식 선택자</h3>
+	<form id="form_">
+		Name: <input type="text" name="user"><br>
+		Password: <input type="password" name="password"><br>
+		Male: <input type="radio"><br>
+		Female: <input type="radio"><br>
+		I have a bike: <input type="checkbox"><br>
+		<input alt="text" src="img1.jpg" type="image" width="200px" height="200px"><br>
+		<button type="button">Useless Button</button>
+		<button type="reset" id="reset">Reset</button>
+		<input type="submit" id="submit" value="Submit">
+		<button id="image">Image test</button>
+	</form><br>
+	<button id="demo_">input Button</button>
+	<button id="text">type="text"</button>
+	<button id="password">type="password"</button>
+	<button id="radio">type="radio"</button>
+	<button id="checkbox">type="checkbox"</button>
+	<script>
+		$(document).ready(function(){
+			$("#demo_").click(function(){
+				$(":input").css("background-color","red");
+			})
+			$("#text").click(function(){
+				$(":text").css("background-color","yellow"); // type = "text"
+			})
+			$("#password").click(function(){
+				$(":password").css("background-color","yellow"); // type = "password"
+			})
+			$("#radio").click(function(){
+				$(":radio").wrap("<span style='background-color:blue'>");
+			})
+			$("#checkbox").click(function(){
+				$(":checkbox").wrap("<span style='background-color:aqua'>");
+			})
+			$("#reset").click(function(){
+				$(":reset").css("background-color","red");
+			})
+			$("#submit").click(function(){
+				$(":submit").css("background-color","red");
+			})
+			$("#button").click(function(){
+				$(":button").css("background-color","red");
+			})
+			$("#image").click(function(){
+				$(":image").css("width","100");
+				$(":image").css("height","100");
+			})
+		})
+	</script>
+	<form action="">
+		Name: <input type="text" name="user"><br>
+		File: <input type="file" name="myfile">
+	</form>
+	<script>
+		$(document).ready(function(){
+			$(":file").css("background-color","red");
+		})
+	</script>
+	
+	<h3> :enabled / :disabled / :selected / :checked </h3>
+	<form>
+		Name: <input type="text" name="user"><br>
+		ID: <input type="text" name="id" disabled="disabled">
+		Age: <select >
+			<option>10세 미만</option>
+			<option selected="selected">10~20세</option>
+			<option>20~30세</option>
+			<option>30~40세</option>
+			<option>40~50세</option>
+		</select><br>
+		bike: <input type="checkbox"><br>
+		car: <input type="checkbox" checked = "checked"><br>
+		bike: <input type="checkbox"><br>
+	</form><br>
+	<button id="enabled">enabled</button>
+	<button id="disabled">disabled</button>
+	<button id="selected">selected</button>
+	<button id="checked">checked</button>
+	<script>
+		$(document).ready(function(){ // disabled="disabled" 사용 못하게 하는 역할
+			$("#enabled").click(function(){
+				$(":enabled").css("background-color","yellow");
+			})
+			$("#disabled").click(function(){
+				$(":disabled").css("background-color","green");
+			})
+			$("#select").click(function(){
+				$(":selceted").css("background-color","red");
+			})
+			$("#checked").click(function(){
+				$(":checked").wrap("<span style='background-color:red'>")
+			})
+		})
+	</script>
+</body>
+</html>

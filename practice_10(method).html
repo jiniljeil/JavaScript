@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+<head>
+	<script src="jquery-3.4.1.min.js"></script>
+<meta charset="UTF-8">
+<title>Untitled Document</title>
+</head>
+
+<body>
+	<h3>Mouse Method </h3>
+	<form>
+		<h4>click / dbclick </h4>
+		<h4>mouseenter / mouseleave / mouseover / mousedown </h4>
+		<h4>mouseup / mouseout / mousemove / hover </h4>
+	</form>
+	<br>
+	<h3>Form Event Method </h3>
+	<form>
+		<h4>submit / change / select / focus / blur / focusin / focusout</h4>
+	</form>
+	<h4>(submit method) / (select method) / (change method)</h4>
+	<form action="">
+		First name: <input type="text" name="firstName" value="Mickey"><br>
+		Last name: <input type="text" name="lastName" value="Mouse"><br>
+		<input type="submit" value="submit"><br>
+	</form>
+	<script>
+		$(document).ready(function(){
+			$("form").submit(function(){ // 무조건 form 요소이어야 실행 된다.
+				alert("제출되었습니다.!");
+			});
+			$("input").select(function(){ // text가 드래그 될때 실행
+				alert("Text Marked !");
+			})
+			$("input").change(function(){ // input, textarea, select 요소에서만 발생 
+				alert("Text changed !");
+			})
+		})
+	</script>
+	
+	<h3> KeyBoard Method</h3>
+	<h4> keydown / keypress / keyup </h4>
+	
+	<h3> Browser Method</h3>
+	<h4> resize / scroll </h4>
+	
+</body>
+</html>

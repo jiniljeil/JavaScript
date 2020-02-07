@@ -1,0 +1,162 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Untitled Document</title>
+	
+</head>
+
+<body>
+	<h3> form[] collection </h3>
+	<form id="f">
+		First name: <input type="text" name="fn" value="Donald"><br>
+		Last name: <input type="text " name="ln" value="Duck"><br>
+		<input type="submit" value="submit"> 
+	</form>
+	<p> Click "Try it" to display the value of each element in the form.</p>
+	<button type="button" onClick="myfunction()" >Try it</button>
+	<p id="demo"></p>
+	<script>
+		function myfunction(){
+			var x = document.getElementById("f"); // document.form[0]; 이것과 같다.
+			var text = "";
+			var i;
+			for (i = 0; i<x.length; i++){
+				text += x.elements[i].value + "<br>";
+			}
+			document.getElementById("demo").innerHTML=text;
+		}
+	</script>
+	<h3> images[] collection</h3>
+	<script>
+		function changeImage(){
+			document.images[0].src = "img3.jpg";
+		}// image는 alt 속성 필수 !
+	</script>
+	<img src="img1.jpg" alt="img1" width="200" height="200">
+	<img src="img2.jpg" alt="img2" width="200" height="200"> 
+	<input type="submit" value="변경" onClick="changeImage()"><br>
+	
+	<h3> attribute value (change)</h3><br>
+	<img id="image" src="img3.jpg" alt="img3" width="200" height="200">
+	<button type="button" onclick="change()">changeImage</button>
+	<script>
+		function change(){
+			document.getElementById("image").src="img2.jpg"; // attribute access(change)
+		}
+	</script>
+	
+	<h3>setAttribute(attribute, value)</h3>
+	<style>.democlass{
+			color:red;
+		}
+	</style>
+	<h3> Hello World</h3>
+	<p id="hi"> Good javaScript !</p>
+	<button type="button" onClick="color_change()">Try it</button>
+	<button type="button" onClick="ch()">Blue</button>
+	<script>
+		function color_change(){
+			document.getElementsByTagName("h3")[4].setAttribute("class","democlass");
+		}
+		function ch(){
+			document.getElementsById("hi").style.color="blue"; // 실행이 안됨.
+		}
+	</script>
+	
+	<p>createElement() and appendChild()</p>
+	<button onClick="create()">Add</button>
+	<p id="hello"></p>
+	<script>
+		function create(){
+			var btn = document.createElement("button"); // 버튼 생성
+			var t = document.createTextNode("CLICK ME"); // 버튼 이름 지정
+			btn.appendChild(t); // 버튼에 이름 추가
+			document.body.appendChild(btn); // 버튼 추가
+			
+			var para = document.createElement("p");
+			var x = document.createTextNode("add statement~");
+			para.appendChild(x);
+			document.getElementById("hello").appendChild(para);
+		}
+	</script>
+	
+	<h3> List and removeChild()</h3>
+	<ul id="remove"><li>coffee</li><li>Tea</li><li>Milk</li></ul>
+	<p>Remove the first item from the list</p>
+	<button type="button" onClick="add_()">Add</button>
+	<button type="button" onClick="remove_()">Remove</button>
+	<button type="button" onClick="replace_()">Replace</button>
+	<script>
+		function remove_(){
+			var list = document.getElementById("remove");
+			//list.parentNode.removeChild(list); // 리스트 전체 삭제
+			list.removeChild(list.childNodes[0]); // 첫번째 index 삭제 
+		}
+		function add_(){
+			var item = document.createElement("li");
+			var r = document.createTextNode("Water");
+			item.appendChild(r);
+			document.getElementById("remove").appendChild(item);
+		}
+		function replace_(){
+			
+			//첫번째 방식
+//			var text_ = document.createTextNode("Flower");
+//			var list = document.getElementById("remove").childNodes[0];
+//			list.replaceChild(text_,list.childNodes[0]);
+			
+			//두번째 방식
+			var item = document.createElement("li");
+			var text_ = document.createTextNode("Node");
+			item.appendChild(text_);
+			var x = document.getElementById("remove");
+			x.replaceChild(item,x.childNodes[0]);
+		}
+	</script>
+	<h3>anchors[] (name 특성이 있는 문의의  모든 a 요소 모음을 반환)</h3>
+	<a name="HTML">HTML Tutorial</a><br>
+	<a name="CSS">CSS Tutorial</a><br>
+	<a >XML Tutorial</a><br><br>
+	
+	<button onClick="print()">Print the content about anchors[] </button>
+	<p id="demo1"></p>
+	<p id="demo2"></p>
+	<script>
+		function print(){
+			var len = document.anchors.length;
+			document.getElementById("demo1").innerHTML="anchors.length = "+len;
+			var x = document.anchors[0].innerHTML; // anchors index access
+			document.getElementById("demo2").innerHTML="anchors[0].innerHTML ="+x;
+		}
+	</script>
+	<h3>document.body.innerHTML (body에 적힌 content들을 반환)</h3>
+	<button onClick="body_()">body</button>
+	<p id="b"></p>
+	<script>
+		function body_(){
+			//document.body.innerHTML="Some new HTML content"; // 웹페이지의 모든 내용을 지우고 위 문장으로 바뀜.
+			//document.body.style.backgroundColor="yellow";
+			var x = document.body.innerHTML; //body에 적힌 것들을 모두 반환 
+			document.getElementById("b").innerHTML=x;
+		}
+	</script>
+	<h3>Image Collection</h3>
+	<script>
+		document.write("document.images.length = ",document.images.length,"<br>");
+		document.write("document.images[0].src = ",document.images[0].src);
+	</script>
+	
+	<h2>Event !</h2>
+	<h3 onClick="this.innerHTML='Event is take placed !'"> If you click this sentence, this sentence will be changed </h3>
+	
+	<button id="event_">Date (onclick)</button>
+	<p id="event"></p>
+	<script>
+		document.getElementById("event_").onclick=date_;
+		function date_(){
+			document.getElementById("event").innerHTML=Date();
+		}
+	</script>
+</body>
+</html>

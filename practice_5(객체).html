@@ -1,0 +1,277 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Untitled Document</title>
+</head>
+
+<body>
+	<h3>Differance from Array and Object </h3> 
+	<script>
+		var car = {"head":"car_head","body":"car_body"}; 
+		document.write(car["head"]+"<br>") // array
+		var object = {head:"object_car_head",body:"object_car_body"};
+		document.write(object.head) // object
+	</script>
+	<h3>Object Definition using producer function</h3>
+	<script>	
+		function car(model,speed,color){
+			this.model = model;
+			this.speed = speed;
+			this.color = color; // attribute
+			this.break = function (){this.speed-= 10;};
+			this.accel = function (){this.speed+= 10;};
+		}
+		var myCar = new car("BMW",100,"black"); // 객체 생성을 위해 new 를 꼭 써줘야 한다. 객체생성 new 
+		var yourCar = new car("Benz",160,"Gray");
+		document.write("내 차의 모델:"+myCar.model+" 속도:"+myCar.speed+" 색상:"+myCar.color+"<br>");
+		yourCar.accel();
+		document.write("당신 차의 모델:"+yourCar.model+" 속도:"+yourCar.speed+" 색상:"+yourCar.color+"<br>");
+	</script>
+	<br>
+	<script>
+		var fruits=["Orange","Pear","Apple","Banana"];
+		var empty = fruits.join();
+		document.write("Result as join method (empty): "+empty+"<br>"); // insert comma in whitespace
+		var and = fruits.join(" and ");
+		document.write("Result as join method (and) : "+and+"<br>"+"<br>"); // insert and in whitespace
+		
+		var array01 = [1,2,3];
+		var array02 = [4,5,6];
+		var concat_ = fruits.concat(array01,array02);
+		document.write("Result as concat method : ",concat_,"<br>","<br>");
+		
+		var num = fruits.indexOf("Apple");
+		fruits.push("Blueberry");
+		document.write("Result as push method (Blueberry) : ",fruits,"<br>"); // the push is applied in end of array.
+		fruits.pop();
+		document.write("Result as pop method : ",fruits,"<br>","<br>"); // the pop is applied in end of array.
+		document.write("Result as indexOF() method (find Apple) : ",num,"<br>","<br>");
+		var factor = fruits.shift();
+		document.write("Result as shift method (applied array) :",fruits,"<br>","index size: ",fruits.length,"<br>");
+		document.write("Result as shift method : ",factor,"<br>");
+		
+		fruits.unshift("happy","day");
+		document.write("Result as unshift method (applied array) : ",fruits,"<br>","index size: ",fruits.length,"<br>","<br>");
+		
+		fruits.splice(2,2); // index 2 번에서 시작하여 2개 삭제
+		document.write("Result as splice method (delete): ",fruits,"<br>");
+		fruits.splice(2,1,"Pear");
+		document.write("Result as splice method (delete,add): ",fruits,"<br>");
+		
+		var slice = fruits.slice(1,3);
+		document.write("The array of the name of fruits :", fruits,"<br>");
+		document.write("Result as slice method : ",slice,"<br>"); // Extract the index of 1,2. 
+	
+	</script>
+	<br>
+	<h3>Producer random of the order</h3>
+	
+	<script>
+		var arr =  [1, 6, 48, 3, 58, 23];
+		document.write("Original of the array : ",arr,"<br>");
+		function random_(){
+			arr.sort(function (a,b){return 0.5 - Math.random()}); // random the order 
+			document.getElementById("demo").innerHTML=arr;
+		}
+	</script>
+	<button onClick="random_()" >Random~!!</button>
+	
+	<p id="demo"></p>
+	<h3> Find the value of MAX, MIN </h3>
+	<script>
+		var arr =  [1, 6, 48, 3, 58, 23];
+		arr.sort(function(a,b){return a-b}); // sort();
+		document.write("max : ",arr[arr.length-1]);
+		document.write("  min : ",arr[0],"<br>");
+		
+		document.write("max() method : ",Math.max.apply(null,arr)," ,  ");
+		document.write("max() method : ",Math.min.apply(null,arr));
+	</script><br>
+	<h3>Date Object </h3>
+	<script>
+		var date = new Date(2020,0,8, 0,0,0); // declare date object 
+		document.write(date,"<br>");
+		var Today = new Date();
+		document.write(Today.toString()+"<br>"); // show the day and time of the today
+		document.write("get method : ",Today.getFullYear(),"<br>");
+		var set_date = new Date();
+		
+		set_date.setFullYear(2019,1,1);
+		document.write("set method : ",set_date);
+	</script>
+	<h3>--Total Survival--</h3>
+	생년원일 : Year : <input id="year">
+	Month : <input id="month">
+	Day : <input id ="day"><br>
+	<button type="button" onclick="func()">계산</button>
+	
+	살아온 날 수 : <p id="count"></p>
+	<script>
+		function func(){
+			var day = new Date();
+			var arr = new Array();
+			var now = new Array();
+			
+			arr[0] = Number(document.getElementById("year").value);
+			arr[1] = Number(document.getElementById("month").value);
+			arr[2] = Number(document.getElementById("day").value);
+			
+			now[0] = day.getFullYear();
+			now[1] = day.getMonth(); // 0 ~ 11 
+			now[2] = day.getDate();
+			
+			var day = 0;
+			var y = now[0]-arr[0];
+			var mon = [31,28,31,30,31,30,31,31,30,31,30,31];
+			
+			while(y > 0){
+				now[2] += 365;
+				y--;
+			}
+			for(var i = 0 ; i< 12; i++){
+				if (now[1] == i){
+					for(var j = 0; j<i; j++){
+						now[2] += mon[j];
+					}
+				}
+				if (arr[1] == i+1){
+					for(var j = 0; j<i; j++){
+						arr[2] += mon[j];
+					}
+				}
+			}
+			day = now[2] - arr[2] + 1; // 오늘도 포함
+			document.getElementById("count").innerHTML=day;
+		}
+	</script>
+	<h3> JavaScript Math.PI</h3>
+	<script>
+	
+	</script>
+	<h3> 주민등록번호 형식 확인</h3>
+	<form name="check_"> 
+		주민등록번호 입력 : <input type ="text" id= "number" size = "14">
+	</form>
+	<button type="button" onClick="check()">검색</button>
+	<p id = "demo_1"></p>
+	<script>
+		function check (){
+			var x = check_.number.value;
+			var flag = /\d{6}-[1234]\d{6}/; // g : 모든 문자열에 해당, \d{6} 6자리 [12] 1 또는 2 또는 3 또는 4
+			if(flag.test(x)){ // 플래그 method 
+				document.getElementById("demo_1").innerHTML= x; // flag.exec(x) // 발견된 텍스트 출력
+			}
+		}
+	</script>
+	<h3 > Using Prototype (Classical 방식) </h3>
+	<script>	
+		function Car(model, speed, color){
+			this.model = model;
+			this.speed = speed;
+			this.color = color;
+		}
+		Car.prototype.battery = false;
+		Car.prototype.speedUp = function(){
+			this.speed += 20;
+			return this.speed;
+		} // prototype method
+		Car.prototype.speedDown = function(){
+			this.speed -= 10;
+			return this.speed;
+		} // prototype method
+		var myCar = new Car("BMW",100,"black"); // 객체 생성할 때 꼭 new 쓰자 ...
+		
+		document.write("myCar : ", myCar.model, " ",myCar.speed," ", myCar.color,"<br>");
+		document.write("myCar prototype attribute : ", myCar.battery,"<br>");
+		document.write("myCar prototype method : ", myCar.speedUp(), " ", myCar.speedDown(),"<br>");
+	</script>
+	<h3 >Prototypical 방식</h3>
+	<script>
+		var myCar_ = {
+			model : "Benz",
+			speed : 120,
+			color : "Black",
+			up_ : function(){
+				this.speed += 20;
+				return this.speed;
+			}
+		}
+		document.write("myCar_ : ",myCar_.model," ", myCar_.speed," ", myCar_.color,"<br>");
+		document.write("speed : ",myCar_.up_(),"<br>");
+	</script>
+	<h3 > (Try, Catch, throw, finally) 예외처리 </h3>
+	<p >Please input a number between 5 and 10: </p>
+	<input type="text" id = "value_">
+	<button type="button" onClick="check()">Test input</button><br>
+	<p id="d"></p>
+	<script>
+		function check(){
+			var msg;
+			var x = document.getElementById("value_").value;
+			try{ // 오류가 발생할 수 있는 블록 
+				if(x==""){throw "empty";}
+				if(isNaN(x)){throw "not a number";}
+				x = Number(x); // 중요 !
+				if(x < 5) {throw "too low";}
+				else if(x > 10){
+					throw "too high";
+				}
+				/*else{
+					throw "nice data !"; // 이렇게 사용할 수 도 있음. !! 
+					//document.getElementById("d").innerHTML= "nice data !";
+				}*/ // Finally를 사용하지 않을 경우
+			}catch(err){ // 오류가 발생했을 때 처리하는 블록 
+				msg = err;
+			}finally{ // finally 는 try와 catch와 상관없이 무조건 실행되는 블록
+				if(msg == undefined){ // var 변수 선언 이후 선언해주지 않으면 undefined가 할당되므로 이를 이용함.
+					document.getElementById("d").innerHTML="Good Data !";
+				}else{
+					document.getElementById("d").innerHTML=("input is "+msg) ;
+				}
+			}
+		}
+	</script>
+
+	<h3> JavaScript Errors (utilizing err.name (+err.message))</h3>
+	<script> // RangeError
+		var num = 100;
+		try{
+			num.toPrecision(222); // toPreision(3) ex) 1.23543 -> 1.23 
+		}catch(err){
+			document.write(err.name,"<br>"); // range error
+		}
+	</script>
+	<script> // Reference Error
+		var x = 1;
+		try{
+			x = y + 1;
+		}catch(err){
+			document.write(err.name,"<br>"); // error 객체 
+		}
+	</script>
+	<script> // Syntax Error
+		var x;
+		try{
+			eval("alert('hello)"); 
+		}catch(err){
+			document.write(err.name,"<br>");
+		}
+	</script>
+	<script> // TypeError
+		var num = 1;
+		try{
+			num.toUpperCase()
+		}catch(err){
+			document.write(err.name,"<br>");
+		}
+	</script>
+	<script> // URL Error
+		try{
+			decodeURI("aaa%%%"); // 잘못된 URL (URL 에서 %를 사용할 수 없다.)
+		}catch(err){
+			document.write(err.name,"<br>");
+		}
+	</script>
+</body>
+</html>

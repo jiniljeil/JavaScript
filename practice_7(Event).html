@@ -1,0 +1,207 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Untitled Document</title>
+</head>
+
+<body onLoad="func()">
+	<script>
+//	 function func(){
+//		 document.body.style.backgroundColor='blue';
+//	 }
+	</script>
+	Enter your name: <input type="text" id="txt" onChange="change_()">
+	<p>transforms the input text to upper case</p>
+	<script>
+		function change_(){
+			var x = document.getElementById("txt");
+			x.value = x.value.toUpperCase(); 
+		}
+	</script>
+	<div onmouseover="over(this)" onMouseOut="out(this)">Mouse on/out</div>
+	<script>
+		function over(object){
+			object.innerHTML = "Thank you";
+		}
+		function out(object){
+			object.innerHTML = "Mouse over me";
+		}
+	</script><br>
+	<h3> onfocus / onblur (Event는 HTML, Script, EventListener) </h3>
+	Enter your name: <input type="text" id="frame" onFocus="focus_()" onBlur="blur_()">
+	<script>
+		function focus_(){
+			document.getElementById("frame").style.backgroundColor="red";
+		}
+		function blur_(){
+			document.getElementById("frame").style.backgroundColor="yellow";
+		}
+	</script>
+	<h3>EventListener(event, function, useCapture)</h3>
+	<button id="h" > Error</button>
+	<script>
+		var x = document.getElementById("h");
+		x.addEventListener("click",function err(){alert("Error !")});
+		x.addEventListener("click",function add(){alert("add executed !")});
+	</script>
+	<p>removeEventListener()</p>
+	<button id="ad">Random Value</button>
+	<button id="remove" onClick="remove_()">Remove event</button><br>
+	<p id = "val"></p>
+	<script>
+		document.getElementById("ad").addEventListener("mousemove",ran());
+		function ran(){
+			document.getElementById("val").innerHTML=Math.random();
+		}
+		function remove_(){
+			document.getElementById("remove").removeEventListener("mousemove",ran());
+		}
+	</script>
+	<h3>Notice the diverse Node (parent node and child node)</h3>
+	<h4 >Body</h4>
+	<p id="h4"></p>
+	<button onClick="body_()">body(body 요소만)</button>
+	<h4 >All</h4>
+	<p id="hh4"></p>
+	<button onClick="all_()">documentElement(문장 전체)</button>
+	
+	<script>
+		function body_(){
+			alert(document.body.innerHTML);
+			document.getElementById("h4").innerHTML = "(Body)NodeName: "+document.getElementById("h4").nodeName;
+		}
+		function all_(){
+			alert(document.documentElement.innerHTML);
+			document.getElementById("hh4").innerHTML = "(ALL)NodeName: "+document.getElementById("hh4").nodeName;
+		}
+	</script>
+	
+	<div id="div1">
+		<h3> Add Node and Insert Node </h3>
+		<p id="p1"> This is another paragraph</p>
+	</div>
+	<script>
+		var para = document.createElement("p");
+		var x = document.createTextNode("the sentence is perfectly produced (append)");
+		para.appendChild(x);
+		document.getElementById("div1").appendChild(para);
+	</script>
+	<script>	
+		var para = document.createElement("p");
+		var x2 = document.createTextNode("This is new ! (insert)");
+		para.appendChild(x2);
+		var child = document.getElementById("p1");
+		document.getElementById("div1").insertBefore(para,child);
+		
+		function remove_(){
+			para.removeChild(x2);
+		}
+		function replace_(){
+			var p = document.createElement("h4"); 
+			var x = document.createTextNode("This sentence is replaced by new sentence");
+			p.appendChild(x);
+			var parent = document.getElementById("div1"); 
+			var child = document.getElementById("p1");
+			parent.replaceChild(p,child); // p1 -> h4로 변경
+		}
+	</script>
+	<h3> Remove Node </h3>
+	<button type="button" onClick="remove_()">Remove</button>
+	<h3> Replace Node </h3>
+	<button type="button" onClick="replace_()">Replace</button>
+	
+	<h3>The HTMLCollection</h3>
+	<h5> getElementByTagName()</h5>
+	<h5> Before</h5><h5 id="h_"></h5>
+	<script>	
+		var x3 = document.getElementsByTagName("h5");
+		document.getElementById("h_").innerHTML=x3[1].innerHTML+"->After";
+		var p_length = document.getElementsByTagName("p");
+		document.write("length(the number) of the factor p: ",p_length.length,"<br>");
+		function red_(){
+			var i ; 
+			for (i = 0; i<p_length.length; i++){
+				p_length[i].style.color = "red";
+			}
+		}
+		var nodes = document.querySelectorAll("p"); // nodelist object
+		function blue_(){
+			var i;
+			for (i = 0 ; i<nodes.length; i++){
+				nodes[i].style.color = "blue";
+			}
+		}
+	</script>
+	<button type="button" onClick="red_()">find p factors</button>
+	<button type="button" onClick="blue_()">find p nodes</button>
+	<h4>Difference between HTMLCollection and NodeList</h4>
+	<p> HTMLCollection: 이름,id 또는 인덱스 번호로 엑세스 가능</p>
+	<p> NodeList: 인덱스 번호로만 엑세스 가능 (included attribute node and text node)</p>
+	
+	<h3> Create Form Object </h3>
+	<button type="button" onClick="func()">Form</button><br>
+	<script>
+		function func(){
+			var t = document.createElement("FORM");
+			t.setAttribute("id","myForm");
+			document.body.appendChild(t);
+			
+			var t2 = document.createElement("input");
+			t2.setAttribute("type","text");
+			t2.setAttribute("value","Doanld");
+			document.getElementById("myForm").appendChild(t2);
+		}
+	</script>
+	<p>The form is produced in the body (under)</p>
+	<br>
+	
+	<form id="myf" name="before_form">
+		First name: <input type="text" name="first" value="Donald"><br>
+		Last name: <input type="text" name="last" value="Duck"><br>
+		<input type="button" onChange="f_()" value="Form reset">
+		<button onClick="s_()">Form submit</button>
+	</form>
+	<script>
+		function f_(){
+			document.getElementById("myf").reset(); // delete the content (작동 오류)
+		}
+		function s_(){
+			document.getElementById("myf").submit(); // submit the content in the server 
+		}
+	</script>
+	<p> Change the value of the name attribute in the form element</p>
+	<button type="button" onClick="na()">Attribute change</button>
+	<p id="demo1"></p>
+	<script>
+		document.getElementById("demo1").innerHTML="(Before) Form name: "+document.getElementById("myf").name;
+		function na(){
+			document.getElementById("myf").name = "newName";
+			document.getElementById("demo1").innerHTML="(After) Form name: "+document.getElementById("myf").name;
+		}
+	</script>
+	<br>
+	<h3>Form element collection</h3>
+	<p> Display the value of the first element in the form.</p>
+	<p id="de"></p>
+	<script>
+		document.getElementById("de").innerHTML = "first element: "+document.getElementById("myf").elements[0].value;
+	</script>
+	<p> Display all of the value of element in the form</p>
+	<p id="demo_"></p>
+	<script>
+		var j = document.getElementById("myf");
+		var txt = "";
+		for (var i = 0 ; i<j.length; i++){
+			txt =  txt + j.elements[i].value + "<br>";
+		}
+		document.getElementById("demo_").innerHTML=txt;
+	</script>
+	<h3>Form collection</h3>
+	<p id = "dem"></p>
+	<script>
+		var k = document.forms[0].id;
+		document.getElementById("dem").innerHTML="The first Form Id: "+k;
+	</script>
+  </body>
+</html>

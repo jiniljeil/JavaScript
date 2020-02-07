@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Untitled Document</title>
+	<script src="jquery-3.4.1.min.js">
+	</script>
+</head>
+
+<body>
+	<script>
+		$(document).ready(function(){
+			$("#first_").click(function(){
+				$("p:first").css("background-color","red");
+			});
+			$("#first_child_").click(function(){
+				$("p:first-child").css("background-color","yellow");
+			});
+			$("#first_of_type_").click(function(){
+				$("p:first-of-type").css("background-color","blue");
+			});
+		});
+		</script>
+		<p>body의 첫 번째 단락, div의 첫 번째 자식.</p>
+		<div style="border: 1px solid">
+			<p>div의 첫 번째 단락, div의 첫 번째 자식</p>
+			<p>div의 두 번째 단락, div의 두 번째 자식</p>
+			<p>div의 마지막 단락, div의 마지막 자식</p>
+		</div><br>
+		<div style="border: 1px solid">
+			<span>span 요소, 이 div의 첫 번째 자식.</span>
+			<p>다른 div의 첫 번째 단락, 이 div의 두 번째 자식.</p>
+			<p>다른 div의 두 번째 단락, 이 div의 세 번째 자식</p>
+			<p>다른 div의 마지막 단락, 이 div의 네 번째 자식.</p>
+			<span>span 요소, 이 div의 마지막 자식</span>
+		</div><br>
+		<div style="border: 1px solid">
+			<p>다른 div의 첫 번째 단락, 이 div의 첫 번째 자식</p>
+			<p>다른 div의 마지막 단락, 이 div의 마지막 자식</p>
+		</div>
+		<p>body의 마지막 단락, 이 div의 마지막 자식</p>
+		
+		<h3> :first / :first-child / :first-of-type</h3>
+		<button id="first_">first</button>
+		<button id="first_child_">first-child</button>
+		<button id="first_of_type_">first-of-type</button>
+		<br>
+		<script>
+			$(document).ready(function(){
+				$("#last").click(function(){ // #id 
+					$("p:last").css("background-color","red");
+				});
+				$("#last_child").click(function(){
+					$("p:last-child").css("background-color","yellow");
+				});
+				$("#last_of_type").click(function(){
+					$("p:last-of-type").css("background-color","blue");
+				});
+			});
+		</script>
+		<h3>:last / :last-child / :last-of-type</h3>
+		<button id="last">last</button>
+		<button id="last_child">last-child</button>
+		<button id="last_of_type">last-of-type</button>
+	<script>
+		$(document).ready(function(){
+			$("#nth_child").click(function(){ // 부모유형에 관계없이 n번째 자식의 요소 선택 
+				$("p:nth-child(3)").css("background-color","red");
+			})
+			$("#nth_last_child").click(function(){ // 마지막 자식으로부터 세어 부모 유형에 상관없이 n번째 선택 
+				$("p:nth-last-child(3)").css("background-color","yellow");
+			})
+			$("#nth_of_type").click(function(){ // 특정 요소의 n번째 선택 
+				$("p:nth-of-type(3)").css("background-color","blue");
+			})
+			$("#nth_last_of_type").click(function(){ // 특정 요소의 마지막으로 부터 n번째 선택 
+				$("p:nth-last-of-type(3)").css("background-color","black");
+			})
+		})
+	</script><br>
+	<h3> :nth-child() / :nth-last-child() / :nth-of-type() / :nth-last-of-type()</h3>
+	<button id="nth_child">nth-child</button>
+	<button id="nth_last_child">nth-last-child</button>
+	<button id="nth_of_type">nth-of-type</button>
+	<button id="nth_last_of_type">nth-last-of-type</button>
+	
+	<h3> :even / :odd </h3>
+	<script>
+		$(document).ready(function(){
+			$("#even_").click(function(){
+				$("p:even").css("background-color","red");
+			})
+			$("#odd_").click(function(){
+				$("p:odd").css("background-color","yellow");
+			})
+		})
+	</script>
+	<button id="even_">even</button>
+	<button id="odd_">odd</button>
+	
+	<h3> :only-child / :only-of-type </h3>
+	<script>
+		$(document).ready(function(){
+			$("#only_child").click(function(){ // 자식이 유일한 요소를 선택한다. (홀로 있을 경우)
+				$("p:only-child").css("background-color","red");
+			})
+			$("#only_of_type").click(function(){ // 그 타입의 유일한 자식의 요소를 선택한다. (span,p 이렇게 있을 경우도 p가 유일하게 존재하여 선택 )
+				$("p:only-of-type").css("background-color","yellow");
+			})
+		})
+	</script>
+	<button id="only_child">only-child</button>
+	<button id="only_of_type">only-of-type</button>
+</body>
+</html>

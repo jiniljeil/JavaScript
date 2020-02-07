@@ -1,0 +1,144 @@
+<!doctype html>
+<html>
+<head>
+	<script src="jquery-3.4.1.min.js"></script>
+<meta charset="UTF-8">
+<title>Untitled Document</title>
+	<style>
+		.test *{
+			display: block;
+			border: 2px solid orange;
+			color: blue;
+			padding: 5px;
+			margin: 15px; 
+		}
+	</style>
+</head>
+
+<body>
+	<h3> 자손 선택자 / 자식 선택자 / 다음 형제 선택자 / 인접 형제 선택자</h3>
+	<script>
+		//padding 위아래 여백 margin 양옆 여백 
+		function  descendants(){ // 선택된 노드의 모든 하위 노드
+			$(document).ready(function(){
+				$("div a").css({"color": "green", "border": "2px solid red"});
+			});}
+		// href="#" // 최상위로 이동 
+	</script>
+	<script>
+		function child(){ // 선택 요소의 바로 하위 노드
+			$(document).ready(function(){
+				$("div > p").css({"color": "green", "border": "2px solid green"});
+			});}
+		// href="#" // 최상위로 이동 
+		function brother(){ // 자신과 동일한 레벨에 있는 노드(다음에 오는 1개의 태그를 선택)
+			$(document).ready(function(){
+				$("a+p").css({"color": "green", "border": "2px solid blue"});
+			});}
+		function brother_(){ // 자신과 동일한 레벨에 있는 노드(1개 이상 선택)
+			$(document).ready(function(){
+				$("a~p").css({"color": "green", "border": "2px solid black"}); // 물결 표시
+			});}
+	</script>
+	<div class="test">
+		<a href="#"> a1 Tag</a>
+		<p>p (child)
+			<span>span 1</span>
+			<a href="#"> a2 Tag</a>
+		</p>
+		<p>p (chlid)
+			<span>span 2</span>
+		</p>
+	</div>
+	<button onclick="descendants()">descendants (div a)</button>
+	<button onClick="child()">child (div 오른쪽꺽쇠 p)</button>
+	<button onClick="brother()">brother (a + p)</button>
+	<button onClick="brother_()">brother (a ~ p)</button>
+	
+	<h3> 순서 선택자 </h3>
+	<h4>This is 0th paragraph
+		<p>child</p>
+	</h4>
+	<h4>This is 1th paragraph</h4>
+	<h4>This is 2th paragraph
+		<h4>child</h4>
+		<p>child</p>
+	</h4>
+	<h4>This is 3th paragraph</h4>
+	<script>
+		function first(){
+			$(document).ready(function(){ // 첫 번째 요소를 선택 
+				$("h4:first").css("background-color","red");
+			});
+		}
+		function first_child(){ // 부모 태그를 기준으로 자식 요소 중에서 첫 번째 해당 태그의 요소를 선택 
+			$(document).ready(function(){
+				$("p:first-child").css("background-color","blue");
+			});
+		}
+		function first_of_type(){ // 특정 유형의 부모 중 첫 번째 자식인 모든 요소를 선택 
+			$(document).ready(function(){
+				$("p:first-of-type").css("background-color","yellow")
+			})
+		}
+	</script>
+	<button onClick="first()">:first</button>
+	<button onClick="first_child()">:first-child</button>
+	<button onClick="first_of_type()">:first-of-type</button>
+	
+	<body>
+		<script>
+			$(document).ready(function(){
+				$("#first_").click(function(){
+					$("p:first").css("background-color","red");
+				});
+				$("#first_child_").click(function(){
+					$("p:first-child").css("background-color","yellow");
+				});
+				$("#first_of_type_").click(function(){
+					$("p:first-of-type").css("background-color","blue");
+				});
+			});
+		</script>
+		<p>body의 첫 번째 단락, div의 첫 번째 자식.</p>
+		<div style="border: 1px solid">
+			<p>div의 첫 번째 단락, div의 첫 번째 자식</p>
+			<p>div의 마지막 단락, div의 마지막 자식</p>
+		</div><br>
+		<div style="border: 1px solid">
+			<span>span 요소, 이 div의 첫 번째 자식.</span>
+			<p>다른 div의 첫 번째 단락, 이 div의 두 번째 자식.</p>
+			<p>다른 div의 마지막 단락, 이 div의 세 번째 자식.</p>
+			<span>span 요소, 이 div의 마지막 자식</span>
+		</div><br>
+		<div style="border: 1px solid">
+			<p>다른 div의 첫 번째 단락, 이 div의 첫 번째 자식</p>
+			<p>다른 div의 마지막 단락, 이 div의 마지막 자식</p>
+		</div>
+		<p>body의 마지막 단락, 이 div의 마지막 자식</p>
+		
+		<h3> :first / :first-child / :first-of-type</h3>
+		<button id="first_">first</button>
+		<button id="first_child_">first-child</button>
+		<button id="first_of_type_">first-of-type</button>
+		<br>
+		<script>
+			$(document).ready(function(){
+				$("#last").click(function(){ // #id 
+					$("p:last").css("background-color","red");
+				});
+				$("#last_child").click(function(){
+					$("p:last-child").css("background-color","yellow");
+				});
+				$("#last_of_type").click(function(){
+					$("p:last-of-type").css("background-color","blue");
+				});
+			});
+		</script>
+		<h3>:last / :last-child / :last-of-type</h3>
+		<button id="last">last</button>
+		<button id="last_child">last-child</button>
+		<button id="last_of_type">last-of-type</button>
+	</body>
+</body>
+</html>

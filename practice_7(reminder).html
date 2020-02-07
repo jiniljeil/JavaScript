@@ -1,0 +1,160 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Untitled Document</title>
+</head>
+<style>
+		#container{
+			width: 200px;
+			height: 200px;
+			position: relative;
+			background-color: aqua;
+		}
+		#animate{
+			width: 50px;
+			height: 50px;
+			position: absolute;
+			background-color: white;
+		}
+	</style>
+	<div id="container">
+		<div id="animate"></div>
+	</div>
+	<button onClick="move_()">MOVE</button>
+<body>
+	<script>
+		function move_(){
+			var element = document.getElementById("animate");
+			var pos = 0 ; // position
+			var id = setInterval(frame,5) // 일정 시간마다 반복 실행 5/1000
+			function frame(){
+				if(pos == 150){
+					clearInterval(id); // 반복실행 중지
+				}else{
+					pos++;
+					element.style.top = pos + "px";
+					element.style.left = pos + "px";
+				}
+			}
+		}
+	</script>
+	<br>
+	<h3> Check the whitespace </h3>
+	<form name="form_">
+		Name: <input type="text" name="name">
+		<button type="submit" onClick="fu()">submit</button>
+	</form>
+	<script>
+		function fu(){
+			var x = document.forms["form_"]["name"].value;
+			if(x == ""){
+				alert("Name must be fill out !");
+				return false;
+			}
+		}
+		function other_method(){
+			var x = document.getElementById("name");
+			if(x.value.length == 0){
+				alert("Name must be fill out !");
+			}
+		} // 다른 방식 
+	</script>
+	
+	<h3>Form 유효성 자동 검증</h3>
+	<form method="post">
+		<input type="text" name="fname" required> 
+		<input type="submit" value="submit">
+	</form>
+	
+	<h3> 회원 ID (6자리~15자리)</h3>
+	<form id="ID">
+		name: <input type="text" id="na">
+		<input type="button" onClick="check()" value= "ID 자릿수 확인">
+	</form>
+	<p id="demo_"></p>
+	<script>
+		function check(){
+			var len = document.getElementById("na").value.length;
+			if(len < 6 || len >15){
+				document.getElementById("demo_").innerHTML="기본 자릿수를 벗어났습니다.";
+			}else{
+				document.getElementById("demo_").innerHTML="확인되었습니다.";
+			}
+		}
+	</script>
+	<h3> Please input a number between 1 and 10: </h3>
+	<input type="text" id="val"><input type="submit" onClick="valid()" value="Submit">
+	<p id="d"></p>
+	<script>
+		function valid(){
+			var x = document.getElementById("val").value;
+			if(x >= 1 && x <=10){
+				document.getElementById("d").innerHTML="Input valid";
+			}else if(x == ""){
+				document.getElementById("d").innerHTML="Input a number"
+			}else{
+				document.getElementById("d").innerHTML="Input not valid";
+			}
+		}
+	</script>
+	<h3> What day is it? (ex| 2017/02/23)</h3>
+	<input type="text" id="txt">
+	<button type="button" onClick="ch()">날짜 확인</button>
+	<p id="h"></p>
+	<script>
+		function ch(){
+			var form = /^\d{4}\/\d{1,2}\/\d{1,2}/;
+			var val = document.getElementById("txt").value;
+			if(val.match(form)){
+			   	document.getElementById("h").innerHTML="올바른 형식입니다.";
+			}else{
+				document.getElementById("h").innerHTML="잘못된 형식입니다.";
+			}
+		}
+	</script>
+	<h3>Search / Replace</h3>
+	<p id="str">Search a string, and display the position of the match</p>
+	<input type="text" id="txt_"><input type="button" onclick="bu()" value="Find index!">
+	<input type="button" onClick="re_()" value ="Replace Uppercase">
+	<p id="index"></p>
+	<p id="new_"></p>
+	<script>
+		function bu(){
+			var val = document.getElementById("txt_").value;
+			var x = document.getElementById("str").innerHTML.search(val);
+			document.getElementById("index").innerHTML="Index of the "+val+" : "+x;
+		}
+		function re_(){
+			var val = document.getElementById("txt_").value;
+			var u = val.toUpperCase();
+			var sen = document.getElementById("str").innerHTML;
+			var t = sen.replace(val,u);
+			document.getElementById("new_").innerHTML=t;
+		}
+	</script>
+	<h3> test() method / exec() method (RegExp 객체)</h3>
+	<p id="test"></p>
+	<p id="exe"></p>
+	<script>	
+		var x = document.getElementById("str").innerHTML;
+		document.getElementById("test").innerHTML="\"match\" in string (/match/.test(x)) = "+/match/.test(x);
+		document.getElementById("exe").innerHTML="\"match\" in string (/match/.test(x)) = "+/match/.exec(x);
+	</script>
+	<h3> checkValidity / validationMessage </h3>
+	<p>Enter a number and click OK: (100~300)</p>
+	<input type="number" id="_txt" max="300" min="100" required>
+	<button onClick="che()">Check</button>
+	<p id="demo"></p>
+	<script>
+		function che(){
+			var inp = document.getElementById("_txt");
+			if(inp.checkValidity() == false){ // 입력 요소에 유효한 데이터가 포함어어 있으면 true를 반환
+				document.getElementById("demo").innerHTML = inp.validationMessage; // 입력 요소의 validationMessage 속성을 설정한다.
+			}else{
+				document.getElementById("demo").innerHTML = "Input OK";
+			}
+		}
+	</script>
+</body>
+</html>

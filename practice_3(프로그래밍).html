@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>practice</title>
+	
+</head>
+	
+<body>
+	<script>
+		var num = {one: 1, two: 2, three: 3};
+		document.write("num1 = "+ num.one + "<br>");
+		document.write("num2 = "+ num.two);
+		document.write(" num3 = "+ num.three);
+	</script>
+	
+	<h3>What Can JavaScript Do?</h3>
+	<p id="demo">JavaScript can change HTML content.</p>
+	
+	<p id="kim"></p>
+	<script>
+		document.getElementById('kim').innerHTML = "What Your Name?";
+		
+//		var age = prompt("How old are you?");
+//		document.write(age);
+		
+//		var bool = confirm("비밀번호가 맞습니까?");
+//		document.write(bool);
+		function func(){
+			var x = Number(document.getElementById('input_').value);
+			var y = Number(document.getElementById('input_2').value);
+			
+			document.getElementById('output_').value = x+y;
+		}
+		
+	</script>
+	<h3> 덧셈 </h3>
+		입력1: <input type="text" id="input_" size="10" >
+		입력2: <input type="text" id="input_2" size="10">
+	
+		결과: <input type="text" id="output_" size="10">
+	
+	<button type="button" onclick="func()">출력</button>
+	<br>
+	<br>
+	
+	
+	<h2> 숫자 맞추기 </h2>
+	<script>
+		var v, num, count = 0, a,b;
+		function cal_b(){ // 숫자 지정
+			v = Math.random() * 100; // 소수점 자리로 나옴 ...그래서 * 100
+			num = Number(v);
+		}
+		function cal_c(){ // 숫자 찾기
+			b = document.getElementById("input_1").value;
+			a = Number(b);
+			if(a > num){
+				document.getElementById("output_1").value="입력된 값이 더 큽니다.";
+			}else if(a < num){
+				document.getElementById("output_1").value="입력된 값이 더 작습니다.";
+			}else{
+				document.getElementById("output_1").value="맞췄습니다.";
+			}
+			count++;
+			document.getElementById("count_").value=count;
+		}
+	</script>
+		입력: <input type="text" id="input_1" size="20">
+		입력 결과: <input type="text" id="output_1" ><br>
+		반복 횟수: <input type="text" id="count_" ><br>
+	
+	<button type="button" onclick="cal_b();">랜덤 숫자 지정</button> 
+	<button type="button" onclick="cal_c();">찾기</button>
+			   
+	<br>
+	<br>
+	<button type="button" onclick="document.getElementById('demo').innerHTML = 'Hello JavaScript!'">Click ME</button>
+	<button type="button" onclick="document.getElementById('demo').style.color='red'">Click ME</button>
+	
+	
+</body>
+</html>
